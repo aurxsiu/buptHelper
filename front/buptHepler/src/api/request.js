@@ -128,7 +128,8 @@ export async function request(
   const code = envelope?.code
 
   if (!response.ok) {
-    if (response.status === 401 || code === 40102) handleUnauthorized()
+    // 仅登录过期（40102）清理登录态；40101 / 40103 属于凭证校验失败，由页面提示
+    if (code === 40102 || (response.status === 401 && code === undefined)) handleUnauthorized()
     const message =
       envelope?.message || HTTP_STATUS_MESSAGE[response.status] || `请求失败（${response.status}）`
     throw new ApiError(message, {

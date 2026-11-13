@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="好帮手校园互助平台 - 修改用户信息" />
+    <title>修改信息 - 好帮手</title>
+  </head>
+  <body class="app-body">
+    <nav class="navbar navbar-expand border-bottom app-navbar">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="./home.html">好帮手</a>
+        <div class="ms-auto d-flex align-items-center gap-2 gap-sm-3">
+          <span class="small text-body-secondary d-none" id="nav-role"></span>
+          <span class="small text-body-secondary text-truncate" id="nav-user">加载中…</span>
+          <a class="btn btn-outline-secondary btn-sm" href="./home.html">返回首页</a>
+          <button class="btn btn-outline-secondary btn-sm" type="button" id="logout-button">
+            退出登录
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+      <div id="profile-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <header class="mb-4">
+        <h1 class="h3 fw-bold mb-2">修改用户信息</h1>
+        <p class="text-body-secondary mb-0">
+          用户名、姓名与用户类型不可修改，仅可修改手机号码、用户简介和登录密码。
+        </p>
+      </header>
+
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <section class="card h-100">
+            <div class="card-body">
+              <h2 class="h6 fw-semibold mb-3">基本信息</h2>
+              <dl class="row mb-0 small" id="account-info">
+                <dt class="col-5 text-body-secondary fw-normal">加载中…</dt>
+                <dd class="col-7 mb-0">—</dd>
+              </dl>
+            </div>
+          </section>
+        </div>
+
+        <div class="col-lg-7">
+          <section class="card mb-4">
+            <div class="card-body">
+              <h2 class="h6 fw-semibold mb-1">联系信息与简介</h2>
+              <p class="small text-body-secondary mb-3">手机号码用于他人与你取得联系，请保持准确。</p>
+
+              <div id="contact-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+              <form id="contact-form" novalidate>
+                <div class="mb-3">
+                  <label class="form-label" for="phone">手机号码</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    placeholder="11 位手机号"
+                    autocomplete="tel"
+                    inputmode="numeric"
+                    maxlength="11"
+                    required
+                  />
+                  <div class="invalid-feedback" data-feedback-for="phone"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="bio">用户简介</label>
+                  <textarea
+                    class="form-control"
+                    id="bio"
+                    name="bio"
+                    rows="3"
+                    maxlength="200"
+                    placeholder="介绍一下自己，方便他人了解你（选填）"
+                  ></textarea>
+                  <div class="invalid-feedback" data-feedback-for="bio"></div>
+                </div>
+
+                <button type="submit" class="btn btn-dark" id="contact-submit">
+                  <span
+                    class="spinner-border spinner-border-sm me-2 d-none"
+                    data-loading-spinner
+                    aria-hidden="true"
+                  ></span>
+                  <span data-loading-text>保存修改</span>
+                </button>
+              </form>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-body">
+              <h2 class="h6 fw-semibold mb-1">登录密码</h2>
+              <p class="small text-body-secondary mb-3">修改成功后当前登录状态会失效，需要使用新密码重新登录。</p>
+
+              <div id="password-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+              <form id="password-form" novalidate>
+                <div class="mb-3">
+                  <label class="form-label" for="oldPassword">原密码</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="oldPassword"
+                    name="oldPassword"
+                    placeholder="请输入当前密码"
+                    autocomplete="current-password"
+                    maxlength="20"
+                    required
+                  />
+                  <div class="invalid-feedback" data-feedback-for="oldPassword"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="newPassword">新密码</label>
+                  <div class="input-group has-validation">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="newPassword"
+                      name="newPassword"
+                      placeholder="请输入新密码"
+                      autocomplete="new-password"
+                      maxlength="20"
+                      required
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      id="toggle-password"
+                      aria-label="显示密码"
+                    >
+                      显示
+                    </button>
+                    <div class="invalid-feedback" data-feedback-for="newPassword"></div>
+                  </div>
+                  <div class="form-text" id="password-hint"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="confirmPassword">确认新密码</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="请再次输入新密码"
+                    autocomplete="new-password"
+                    maxlength="20"
+                    required
+                  />
+                  <div class="invalid-feedback" data-feedback-for="confirmPassword"></div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-dark" id="password-submit">
+                  <span
+                    class="spinner-border spinner-border-sm me-2 d-none"
+                    data-loading-spinner
+                    aria-hidden="true"
+                  ></span>
+                  <span data-loading-text>修改密码</span>
+                </button>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="/src/pages/profile.js"></script>
+  </body>
+</html>

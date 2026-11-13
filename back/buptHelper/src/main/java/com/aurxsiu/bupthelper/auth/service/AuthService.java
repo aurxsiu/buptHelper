@@ -3,6 +3,7 @@ package com.aurxsiu.bupthelper.auth.service;
 import com.aurxsiu.bupthelper.auth.dto.ChangePasswordRequest;
 import com.aurxsiu.bupthelper.auth.dto.LoginRequest;
 import com.aurxsiu.bupthelper.auth.dto.RegisterRequest;
+import com.aurxsiu.bupthelper.auth.dto.UpdateProfileRequest;
 import com.aurxsiu.bupthelper.auth.support.LoginAttemptTracker;
 import com.aurxsiu.bupthelper.auth.vo.LoginResultVO;
 import com.aurxsiu.bupthelper.auth.vo.UsernameAvailabilityVO;
@@ -27,7 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * 登录 / 注册 / 注销 / 修改密码等认证业务。
+ * 登录 / 注册 / 注销 / 修改个人信息 / 修改密码等认证业务。
  */
 @Service
 public class AuthService {
@@ -134,6 +135,23 @@ public class AuthService {
 
     public void logout(AuthUser currentUser) {
         revocationStore.revokeToken(currentUser.tokenId(), currentUser.tokenExpiresAt());
+    }
+
+    @Transactional
+    public UserVO updateProfile(Long userId, UpdateProfileRequest request) {
+        String phone = trimToEmpty(request.phone());
+        String bio = trimToEmpty(request.bio());
+
+        Map<String, String> errors = new LinkedHashMap<>();
+        putIfPresent(errors, "phone", ValidationUtils.validatePhone(phone));
+        putIfPresent(errors, "bio", ValidationUtils.validateBio(bio));
+        requireNoFieldErrors(errors);
+
+        User user = requireUser(userId);
+        user.setPhone(phone);
+        user.setBio(bio.isEmpty() ? null : bio);
+        user.setUpdateTime(LocalDateTime.now());
+        return UserVO.from(userRepository.save(user));
     }
 
     @Transactional

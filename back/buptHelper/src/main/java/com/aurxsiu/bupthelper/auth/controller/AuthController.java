@@ -3,6 +3,7 @@ package com.aurxsiu.bupthelper.auth.controller;
 import com.aurxsiu.bupthelper.auth.dto.ChangePasswordRequest;
 import com.aurxsiu.bupthelper.auth.dto.LoginRequest;
 import com.aurxsiu.bupthelper.auth.dto.RegisterRequest;
+import com.aurxsiu.bupthelper.auth.dto.UpdateProfileRequest;
 import com.aurxsiu.bupthelper.auth.service.AuthService;
 import com.aurxsiu.bupthelper.auth.vo.LoginResultVO;
 import com.aurxsiu.bupthelper.auth.vo.UsernameAvailabilityVO;
@@ -51,6 +52,12 @@ public class AuthController {
     @PostMapping("/register")
     public ApiResponse<UserVO> register(@RequestBody RegisterRequest request) {
         return ApiResponse.ok("注册成功", authService.register(request));
+    }
+
+    @PutMapping("/profile")
+    public ApiResponse<UserVO> updateProfile(@RequestAttribute(AuthInterceptor.ATTR_USER) AuthUser currentUser,
+                                             @RequestBody UpdateProfileRequest request) {
+        return ApiResponse.ok("个人信息修改成功", authService.updateProfile(currentUser.userId(), request));
     }
 
     @PutMapping("/password")

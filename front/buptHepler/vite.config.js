@@ -18,6 +18,7 @@ export default defineConfig({
         login: fileURLToPath(new URL('./index.html', import.meta.url)),
         register: fileURLToPath(new URL('./register.html', import.meta.url)),
         home: fileURLToPath(new URL('./home.html', import.meta.url)),
+        profile: fileURLToPath(new URL('./profile.html', import.meta.url)),
       },
     },
   },

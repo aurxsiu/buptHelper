@@ -83,6 +83,8 @@ function initForm() {
 
   if (searchParams.get('registered') === '1') {
     showAlert(alertBox, '注册成功，请使用新账号登录。', 'success')
+  } else if (searchParams.get('passwordChanged') === '1') {
+    showAlert(alertBox, '密码修改成功，请使用新密码重新登录。', 'success')
   } else if (searchParams.get('logout') === '1') {
     showAlert(alertBox, '已安全退出登录。', 'success')
   }

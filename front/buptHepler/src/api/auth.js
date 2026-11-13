@@ -36,6 +36,15 @@ export function register({ username, password, realName, phone, bio }) {
 }
 
 /**
+ * 修改个人联系信息与简介（手机号码、用户简介）
+ * @param {{ phone: string, bio?: string }} payload
+ * @returns {Promise<object>} 修改后的用户信息
+ */
+export function updateProfile({ phone, bio }) {
+  return request('/auth/profile', { method: 'PUT', body: { phone, bio } })
+}
+
+/**
  * 修改登录密码
  * @param {{ oldPassword: string, newPassword: string }} payload
  */
