@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="好帮手校园互助平台 - 首页" />
+    <title>首页 - 好帮手</title>
+  </head>
+  <body class="app-body">
+    <nav class="navbar navbar-expand border-bottom app-navbar">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="./home.html">好帮手</a>
+        <div class="ms-auto d-flex align-items-center gap-2 gap-sm-3">
+          <span class="small text-body-secondary d-none" id="nav-role"></span>
+          <span class="small text-body-secondary text-truncate" id="nav-user">加载中…</span>
+          <button class="btn btn-outline-secondary btn-sm" type="button" id="logout-button">
+            退出登录
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+      <div id="home-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <header class="mb-4">
+        <h1 class="h3 fw-bold mb-2" id="welcome-title">欢迎使用好帮手</h1>
+        <p class="text-body-secondary mb-0">
+          登录成功。当前为首页占位页面，各业务模块将按需求逐步接入。
+        </p>
+      </header>
+
+      <div class="row g-4">
+        <div class="col-sm-6 col-xl-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="h6 fw-semibold mb-2">好帮手信息查询</h2>
+              <p class="small text-body-secondary mb-0">按帮忙类型查询“请帮忙”需求，支持分页展示。</p>
+            </div>
+            <div class="card-footer bg-transparent pt-0">
+              <span class="small text-body-secondary">规划中</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="h6 fw-semibold mb-2">请帮忙</h2>
+              <p class="small text-body-secondary mb-0">发布、修改、删除自己尚未被响应的需求。</p>
+            </div>
+            <div class="card-footer bg-transparent pt-0">
+              <span class="small text-body-secondary">规划中</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="h6 fw-semibold mb-2">我来也</h2>
+              <p class="small text-body-secondary mb-0">响应他人需求，管理自己提交的响应信息。</p>
+            </div>
+            <div class="card-footer bg-transparent pt-0">
+              <span class="small text-body-secondary">规划中</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="h6 fw-semibold mb-2">统计分析</h2>
+              <p class="small text-body-secondary mb-0">按年月、地域查看月度发布与响应成功统计。</p>
+            </div>
+            <div class="card-footer bg-transparent pt-0">
+              <span class="small text-body-secondary">规划中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="card mt-4">
+        <div class="card-body">
+          <h2 class="h6 text-body-secondary mb-3">当前账号信息</h2>
+          <dl class="row mb-0 small" id="profile-list">
+            <dt class="col-sm-3 text-body-secondary fw-normal">加载中…</dt>
+            <dd class="col-sm-9 mb-0">—</dd>
+          </dl>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/pages/home.js"></script>
+  </body>
+</html>

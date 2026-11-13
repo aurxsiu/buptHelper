@@ -1,0 +1,24 @@
+:root {
+  /* 中文字体优先，其余交给 Bootstrap 默认主题 */
+  --bs-body-font-family:
+    'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, 'Helvetica Neue',
+    Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--bs-body-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.invalid-feedback.d-block,
+.valid-feedback.d-block {
+  font-size: 0.8125rem;
+}
+
+.app-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
