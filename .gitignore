@@ -1,0 +1,45 @@
+# ===== 系统 / 编辑器 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+*~
+
+# ===== 日志 / 临时文件 =====
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+
+# ===== 环境变量 / 密钥 =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+# ===== 后端 (Spring Boot / Maven) =====
+back/**/target/
+back/**/build/
+back/**/.mvn/wrapper/maven-wrapper.jar
+back/**/HELP.md
+
+# ===== 前端 (Vite / Node) =====
+front/**/node_modules/
+front/**/dist/
+front/**/dist-ssr/
+front/**/.vite/
+front/**/*.local
+front/**/coverage/
