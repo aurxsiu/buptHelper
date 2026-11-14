@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="好帮手校园互助平台 - 请帮忙需求详情" />
+    <title>需求详情 - 好帮手</title>
+  </head>
+  <body class="app-body">
+    <nav class="navbar navbar-expand border-bottom app-navbar">
+      <div class="container flex-wrap gap-2">
+        <a class="navbar-brand fw-bold me-0" href="./home.html">好帮手</a>
+        <ul class="nav nav-underline app-navbar__links me-auto">
+          <li class="nav-item"><a class="nav-link" href="./home.html">首页</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./requests.html">请帮忙</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="./responses.html">我来也</a></li>
+          <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">统计分析</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 gap-sm-3">
+          <span class="small text-body-secondary d-none" id="nav-role"></span>
+          <span class="small text-body-secondary text-truncate" id="nav-user">加载中…</span>
+          <a class="btn btn-outline-secondary btn-sm" href="./profile.html">修改信息</a>
+          <button class="btn btn-outline-secondary btn-sm" type="button" id="logout-button">
+            退出登录
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+      <div id="page-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <div class="card" id="detail-loading">
+        <div class="card-body text-center text-body-secondary py-5">
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+          正在加载需求详情…
+        </div>
+      </div>
+
+      <div class="card d-none" id="detail-error">
+        <div class="card-body text-center py-5">
+          <p class="text-body-secondary mb-3" id="detail-error-text">需求不存在或已被删除。</p>
+          <a class="btn btn-dark btn-sm" href="./home.html">返回首页</a>
+        </div>
+      </div>
+
+      <div id="detail-content" class="d-none">
+        <div id="detail-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+        <section class="card mb-4">
+          <div class="card-body">
+            <div class="d-flex flex-wrap align-items-start justify-content-between gap-3">
+              <div class="flex-grow-1">
+                <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                  <h1 class="h4 fw-bold mb-0" id="request-title">需求详情</h1>
+                  <span id="request-status"></span>
+                </div>
+                <div class="request-meta small text-body-secondary" id="request-meta"></div>
+              </div>
+              <div class="d-none" id="owner-actions">
+                <div class="d-flex flex-wrap gap-2">
+                  <a class="btn btn-outline-dark btn-sm" href="./requests.html" id="edit-button"
+                    >修改需求</a
+                  >
+                  <button class="btn btn-outline-danger btn-sm" type="button" id="delete-button">
+                    删除需求
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div id="status-banner" class="alert d-none mt-3 mb-0" role="status"></div>
+          </div>
+        </section>
+
+        <section class="card mb-4">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-3">需求描述</h2>
+            <p class="pre-line mb-0" id="request-description"></p>
+          </div>
+        </section>
+
+        <section class="card mb-4 d-none" id="media-section">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-3">图片与视频</h2>
+            <div class="gallery mb-3 d-none" id="image-gallery"></div>
+            <div class="d-none" id="video-wrapper"></div>
+          </div>
+        </section>
+
+        <section class="card mb-4">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-3">发布者信息</h2>
+            <dl class="row mb-0 small" id="publisher-info"></dl>
+          </div>
+        </section>
+
+        <section class="card mb-4 d-none" id="responder-actions">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-2">响应这条需求</h2>
+            <p class="small text-body-secondary mb-3" id="responder-hint">
+              如果你能提供帮助，点击“我来也”提交你的介绍信息。
+            </p>
+            <div class="d-flex flex-wrap gap-2" id="responder-buttons"></div>
+          </div>
+        </section>
+
+        <section class="card d-none" id="responses-section">
+          <div class="card-header bg-transparent d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <h2 class="h6 fw-semibold mb-0">“我来也”响应</h2>
+            <span class="small text-body-secondary" id="responses-summary"></span>
+          </div>
+          <div class="card-body">
+            <div id="responses-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+            <div id="responses-list"></div>
+            <div class="text-center text-body-secondary py-4 d-none" id="responses-empty">
+              还没有人响应这条需求。
+            </div>
+            <div class="d-flex justify-content-center">
+              <nav aria-label="响应列表分页" id="responses-pagination" class="d-none"></nav>
+            </div>
+          </div>
+        </section>
+
+        <p class="small text-body-secondary mt-4 mb-0" id="owner-hint"></p>
+      </div>
+    </main>
+
+    <div
+      class="modal fade"
+      id="image-preview-modal"
+      tabindex="-1"
+      aria-labelledby="image-preview-title"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-6" id="image-preview-title">图片预览</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="image-preview-img" src="" alt="需求图片预览" class="img-fluid rounded" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="user-profile-modal"
+      tabindex="-1"
+      aria-labelledby="user-profile-title"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-6" id="user-profile-title">用户信息</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+          </div>
+          <div class="modal-body">
+            <div id="user-profile-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+            <dl class="row mb-0 small" id="user-profile-list"></dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/pages/request-detail.js"></script>
+  </body>
+</html>

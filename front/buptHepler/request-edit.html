@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="好帮手校园互助平台 - 发布 / 修改请帮忙需求" />
+    <title>发布需求 - 好帮手</title>
+  </head>
+  <body class="app-body">
+    <nav class="navbar navbar-expand border-bottom app-navbar">
+      <div class="container flex-wrap gap-2">
+        <a class="navbar-brand fw-bold me-0" href="./home.html">好帮手</a>
+        <ul class="nav nav-underline app-navbar__links me-auto">
+          <li class="nav-item"><a class="nav-link" href="./home.html">首页</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./requests.html">请帮忙</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="./responses.html">我来也</a></li>
+          <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">统计分析</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 gap-sm-3">
+          <span class="small text-body-secondary d-none" id="nav-role"></span>
+          <span class="small text-body-secondary text-truncate" id="nav-user">加载中…</span>
+          <a class="btn btn-outline-secondary btn-sm" href="./profile.html">修改信息</a>
+          <button class="btn btn-outline-secondary btn-sm" type="button" id="logout-button">
+            退出登录
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+      <div id="page-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <header class="mb-4">
+        <h1 class="h3 fw-bold mb-2" id="page-title">发布请帮忙需求</h1>
+        <p class="text-body-secondary mb-0" id="page-desc">
+          填写需求主题、帮忙类型、地域与描述，可上传图片和视频帮助他人了解需求。
+        </p>
+      </header>
+
+      <div id="form-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <form id="request-form" novalidate>
+        <section class="card mb-4">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-3">基本信息</h2>
+
+            <div class="mb-3">
+              <label class="form-label" for="title">需求主题</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                maxlength="50"
+                placeholder="用一句话说明你需要什么帮助"
+                autocomplete="off"
+                required
+              />
+              <div class="d-flex justify-content-between">
+                <div class="invalid-feedback" data-feedback-for="title"></div>
+                <div class="form-text ms-auto" id="title-counter">0/50</div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="typeCode">帮忙类型</label>
+                <select class="form-select" id="typeCode" name="typeCode" required>
+                  <option value="">请选择帮忙类型</option>
+                </select>
+                <div class="invalid-feedback" data-feedback-for="typeCode"></div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="regionId">地域</label>
+                <select class="form-select" id="regionId" name="regionId" required>
+                  <option value="">请选择地域</option>
+                </select>
+                <div class="invalid-feedback" data-feedback-for="regionId"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card mb-4">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-3">需求描述</h2>
+            <label class="visually-hidden" for="description">需求描述</label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              rows="6"
+              maxlength="1000"
+              placeholder="说明具体内容、时间、地点以及你希望得到的帮助"
+              required
+            ></textarea>
+            <div class="d-flex justify-content-between">
+              <div class="invalid-feedback" data-feedback-for="description"></div>
+              <div class="form-text ms-auto" id="description-counter">0/1000</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card mb-4">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-1">图片与视频</h2>
+            <p class="small text-body-secondary mb-3">
+              选填。图片最多 6 张，每张不超过 5MB；视频最多 1 个，不超过 100MB。
+            </p>
+
+            <div class="mb-3">
+              <label class="form-label" for="image-input">图片介绍</label>
+              <input
+                type="file"
+                class="d-none"
+                id="image-input"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                multiple
+              />
+              <div class="upload-drop" id="image-drop" role="button" tabindex="0">
+                <span class="upload-drop__icon" aria-hidden="true">+</span>
+                <span class="small text-body-secondary">点击选择图片，或将图片拖拽到此处</span>
+              </div>
+              <div class="upload-grid" id="image-list"></div>
+              <div class="invalid-feedback d-block" id="image-error"></div>
+            </div>
+
+            <div class="mb-0">
+              <label class="form-label" for="video-input">视频介绍</label>
+              <input type="file" class="d-none" id="video-input" accept="video/mp4,video/webm" />
+              <div class="upload-drop" id="video-drop" role="button" tabindex="0">
+                <span class="upload-drop__icon" aria-hidden="true">+</span>
+                <span class="small text-body-secondary">点击选择视频，或将视频拖拽到此处</span>
+              </div>
+              <div class="upload-grid" id="video-list"></div>
+              <div class="invalid-feedback d-block" id="video-error"></div>
+            </div>
+
+            <div class="mt-3 d-none" id="upload-progress">
+              <div class="progress" role="progressbar" aria-label="附件上传进度" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" id="upload-progress-bar" style="width: 0%"></div>
+              </div>
+              <p class="small text-body-secondary mb-0 mt-1" id="upload-progress-text"></p>
+            </div>
+          </div>
+        </section>
+
+        <div class="d-flex flex-wrap gap-2">
+          <button type="submit" class="btn btn-dark" id="request-submit" disabled>
+            <span
+              class="spinner-border spinner-border-sm me-2 d-none"
+              data-loading-spinner
+              aria-hidden="true"
+            ></span>
+            <span data-loading-text>发布需求</span>
+          </button>
+          <a class="btn btn-outline-secondary" href="./requests.html" id="cancel-link">取消</a>
+        </div>
+      </form>
+    </main>
+
+    <script type="module" src="/src/pages/request-edit.js"></script>
+  </body>
+</html>

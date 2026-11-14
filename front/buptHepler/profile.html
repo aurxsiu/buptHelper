@@ -9,9 +9,15 @@
   </head>
   <body class="app-body">
     <nav class="navbar navbar-expand border-bottom app-navbar">
-      <div class="container">
+      <div class="container flex-wrap gap-2">
         <a class="navbar-brand fw-bold" href="./home.html">好帮手</a>
-        <div class="ms-auto d-flex align-items-center gap-2 gap-sm-3">
+        <ul class="nav nav-underline app-navbar__links me-auto ms-3">
+          <li class="nav-item"><a class="nav-link" href="./home.html">首页</a></li>
+          <li class="nav-item"><a class="nav-link" href="./requests.html">请帮忙</a></li>
+          <li class="nav-item"><a class="nav-link" href="./responses.html">我来也</a></li>
+          <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">统计分析</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 gap-sm-3">
           <span class="small text-body-secondary d-none" id="nav-role"></span>
           <span class="small text-body-secondary text-truncate" id="nav-user">加载中…</span>
           <a class="btn btn-outline-secondary btn-sm" href="./home.html">返回首页</a>

@@ -1,6 +1,6 @@
 import { clearSession, getToken } from '../utils/storage.js'
 
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/+$/, '')
+export const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/+$/, '')
 const DEFAULT_TIMEOUT = 15000
 
 const HTTP_STATUS_MESSAGE = {

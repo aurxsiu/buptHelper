@@ -1,0 +1,123 @@
+/* “请帮忙”模块：附件上传、画廊与列表样式 */
+
+.upload-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 1.25rem 1rem;
+  border: 1px dashed var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  background-color: var(--bs-tertiary-bg);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    border-color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+}
+
+.upload-drop:hover,
+.upload-drop:focus-visible,
+.upload-drop.is-dragover {
+  border-color: var(--bs-primary);
+  background-color: var(--bs-primary-bg-subtle);
+  outline: none;
+}
+
+.upload-drop.is-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.upload-drop__icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--bs-secondary-color);
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.upload-item {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  background-color: var(--bs-body-bg);
+}
+
+.upload-item img,
+.upload-item video {
+  display: block;
+  width: 100%;
+  height: 96px;
+  object-fit: cover;
+  background-color: #000;
+}
+
+.upload-item__remove {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  padding: 0.35rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.upload-item__name {
+  display: block;
+  padding: 0.25rem 0.5rem;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.gallery-item {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  background: none;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.15s ease-in-out;
+}
+
+.gallery-item:hover img,
+.gallery-item:focus-visible img {
+  transform: scale(1.04);
+}
+
+.request-title-cell {
+  max-width: 22rem;
+}
+
+.request-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.pre-line {
+  white-space: pre-line;
+}
+
+#image-preview-img {
+  width: auto;
+  max-width: 100%;
+  max-height: 70vh;
+}

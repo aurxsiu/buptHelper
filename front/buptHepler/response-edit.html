@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="好帮手校园互助平台 - 提交 / 修改我来也响应" />
+    <title>提交响应 - 好帮手</title>
+  </head>
+  <body class="app-body">
+    <nav class="navbar navbar-expand border-bottom app-navbar">
+      <div class="container flex-wrap gap-2">
+        <a class="navbar-brand fw-bold me-0" href="./home.html">好帮手</a>
+        <ul class="nav nav-underline app-navbar__links me-auto">
+          <li class="nav-item"><a class="nav-link" href="./home.html">首页</a></li>
+          <li class="nav-item"><a class="nav-link" href="./requests.html">请帮忙</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./responses.html">我来也</a>
+          </li>
+          <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">统计分析</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 gap-sm-3">
+          <span class="small text-body-secondary d-none" id="nav-role"></span>
+          <span class="small text-body-secondary text-truncate" id="nav-user">加载中…</span>
+          <a class="btn btn-outline-secondary btn-sm" href="./profile.html">修改信息</a>
+          <button class="btn btn-outline-secondary btn-sm" type="button" id="logout-button">
+            退出登录
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+      <div id="page-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <header class="mb-4">
+        <h1 class="h3 fw-bold mb-2" id="page-title">提交“我来也”响应</h1>
+        <p class="text-body-secondary mb-0" id="page-desc">填写你与该需求匹配的描述，可上传图片或视频。</p>
+      </header>
+
+      <div id="form-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <section class="card mb-4 d-none" id="request-context-card">
+        <div class="card-body">
+          <div class="d-flex align-items-start justify-content-between gap-3">
+            <div>
+              <h2 class="h6 fw-semibold mb-1" id="context-title">需求主题</h2>
+              <div class="request-meta small text-body-secondary" id="context-meta"></div>
+            </div>
+            <a class="btn btn-outline-secondary btn-sm text-nowrap" href="#" id="context-link">查看需求</a>
+          </div>
+          <p class="pre-line small text-body-secondary mb-0 mt-2" id="context-description"></p>
+        </div>
+      </section>
+
+      <form id="response-form" novalidate>
+        <section class="card mb-4">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-3">响应描述</h2>
+            <label class="visually-hidden" for="description">响应描述</label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              rows="6"
+              maxlength="1000"
+              placeholder="说明你能提供的帮助、时间安排以及联系方式等"
+              required
+            ></textarea>
+            <div class="d-flex justify-content-between">
+              <div class="invalid-feedback" data-feedback-for="description"></div>
+              <div class="form-text ms-auto" id="description-counter">0/1000</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card mb-4">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-1">图片与视频</h2>
+            <p class="small text-body-secondary mb-3">
+              选填。图片最多 6 张，每张不超过 5MB；视频最多 1 个，不超过 100MB。
+            </p>
+
+            <div class="mb-3">
+              <label class="form-label" for="image-input">图片介绍</label>
+              <input
+                type="file"
+                class="d-none"
+                id="image-input"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                multiple
+              />
+              <div class="upload-drop" id="image-drop" role="button" tabindex="0">
+                <span class="upload-drop__icon" aria-hidden="true">+</span>
+                <span class="small text-body-secondary">点击选择图片，或将图片拖拽到此处</span>
+              </div>
+              <div class="upload-grid" id="image-list"></div>
+              <div class="invalid-feedback d-none" id="image-error"></div>
+            </div>
+
+            <div class="mb-0">
+              <label class="form-label" for="video-input">视频介绍</label>
+              <input type="file" class="d-none" id="video-input" accept="video/mp4,video/webm" />
+              <div class="upload-drop" id="video-drop" role="button" tabindex="0">
+                <span class="upload-drop__icon" aria-hidden="true">+</span>
+                <span class="small text-body-secondary">点击选择视频，或将视频拖拽到此处</span>
+              </div>
+              <div class="upload-grid" id="video-list"></div>
+              <div class="invalid-feedback d-none" id="video-error"></div>
+            </div>
+
+            <div class="mt-3 d-none" id="upload-progress">
+              <div
+                class="progress"
+                role="progressbar"
+                aria-label="附件上传进度"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div class="progress-bar" id="upload-progress-bar" style="width: 0%"></div>
+              </div>
+              <p class="small text-body-secondary mb-0 mt-1" id="upload-progress-text"></p>
+            </div>
+          </div>
+        </section>
+
+        <div class="d-flex flex-wrap gap-2">
+          <button type="submit" class="btn btn-dark" id="response-submit" disabled>
+            <span
+              class="spinner-border spinner-border-sm me-2 d-none"
+              data-loading-spinner
+              aria-hidden="true"
+            ></span>
+            <span data-loading-text>提交响应</span>
+          </button>
+          <a class="btn btn-outline-secondary" href="./responses.html" id="cancel-link">取消</a>
+        </div>
+      </form>
+    </main>
+
+    <script type="module" src="/src/pages/response-edit.js"></script>
+  </body>
+</html>

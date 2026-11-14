@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="好帮手校园互助平台 - 我的响应" />
+    <title>我的响应 - 好帮手</title>
+  </head>
+  <body class="app-body">
+    <nav class="navbar navbar-expand border-bottom app-navbar">
+      <div class="container flex-wrap gap-2">
+        <a class="navbar-brand fw-bold me-0" href="./home.html">好帮手</a>
+        <ul class="nav nav-underline app-navbar__links me-auto">
+          <li class="nav-item"><a class="nav-link" href="./home.html">首页</a></li>
+          <li class="nav-item"><a class="nav-link" href="./requests.html">请帮忙</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./responses.html">我来也</a>
+          </li>
+          <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">统计分析</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 gap-sm-3">
+          <span class="small text-body-secondary d-none" id="nav-role"></span>
+          <span class="small text-body-secondary text-truncate" id="nav-user">加载中…</span>
+          <a class="btn btn-outline-secondary btn-sm" href="./profile.html">修改信息</a>
+          <button class="btn btn-outline-secondary btn-sm" type="button" id="logout-button">
+            退出登录
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+      <div id="page-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <header class="d-flex flex-wrap align-items-start justify-content-between gap-3 mb-4">
+        <div>
+          <h1 class="h3 fw-bold mb-2">我的响应</h1>
+          <p class="text-body-secondary mb-0">
+            查看你提交的所有“我来也”响应；仅“待接受”的响应可以修改或取消。
+          </p>
+        </div>
+        <a class="btn btn-dark" href="./responses.html">去响应新的需求</a>
+      </header>
+
+      <div id="list-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <section class="card">
+        <div class="card-header bg-transparent d-flex flex-wrap align-items-center justify-content-between gap-2">
+          <ul class="nav nav-pills" id="status-tabs" role="tablist">
+            <li class="nav-item">
+              <button class="nav-link active" type="button" data-status="">全部</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" type="button" data-status="0">待接受</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" type="button" data-status="1">已接受</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" type="button" data-status="2">已拒绝</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" type="button" data-status="3">已取消</button>
+            </li>
+          </ul>
+          <span class="small text-body-secondary" id="page-summary">正在加载…</span>
+        </div>
+
+        <div id="response-list"></div>
+
+        <div class="card-body text-center text-body-secondary py-4 d-none" id="empty-state">
+          <p class="mb-0" id="empty-text">你还没有提交过“我来也”响应。</p>
+        </div>
+
+        <div class="card-footer bg-transparent d-flex justify-content-center py-3">
+          <nav aria-label="响应列表分页" id="pagination" class="d-none"></nav>
+        </div>
+      </section>
+    </main>
+
+    <div
+      class="modal fade"
+      id="response-detail-modal"
+      tabindex="-1"
+      aria-labelledby="response-detail-title"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-6" id="response-detail-title">响应详情</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+          </div>
+          <div class="modal-body">
+            <div id="response-detail-alert" class="alert d-none" role="alert" aria-live="polite"></div>
+            <div id="response-detail-content">正在加载…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/pages/my-responses.js"></script>
+  </body>
+</html>

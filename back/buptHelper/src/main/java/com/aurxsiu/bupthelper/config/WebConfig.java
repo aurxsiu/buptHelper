@@ -16,7 +16,9 @@ public class WebConfig implements WebMvcConfigurer {
     private static final String[] PUBLIC_ENDPOINTS = {
             "/api/auth/login",
             "/api/auth/register",
-            "/api/auth/username-available"
+            "/api/auth/username-available",
+            // 附件内容供 <img> / <video> 直接访问，无法携带请求头
+            "/api/files/*/content"
     };
 
     private final AuthInterceptor authInterceptor;
